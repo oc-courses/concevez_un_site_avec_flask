@@ -18,5 +18,6 @@ def init_db():
     db.drop_all()
     db.create_all()
     db.session.add(Content("What's your favorite scary movie?", 1))
+    db.session.add(Content("THIS IS SPARTAAAAAAA!!!", 0))
     db.session.commit()
     lg.warning('Database initialized!')
