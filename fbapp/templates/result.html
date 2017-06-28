@@ -1,59 +1,52 @@
-<!-- Header -->
-<header>
-  <div class="container" id="maincontent" tabindex="-1">
-    <div class="row">
-        <div class="col-lg-6 col-lg-offset-3">
-          <div class="card">
-            <div class="row">
-              <div class="col-sm-3 col-sm-offset-3">
-                  <img class="img-responsive img-circle user_profile" src="tmp/cover_111823112767411.jpg" id="user_image">
-              </div>
-              <div class="col-sm-3">
-                <h2 id="user_name">Tom</h2>
-              </div>
-              <div class="col-sm-12">
-                <p id="description">Toi, tu n'as pas peur d'être seul ! Les grands espaces et les aventures sont faits pour toi. D'ailleurs, Koh Lanta est ton émission préférée ! Bientôt tu partiras les cheveux au vent sur ton radeau. Tu es aussi un idéaliste chevronné. Quelle chance ! </p>
-              </div>
-            </div>
+{% extends 'base.html' %}
+
+{% block content %}
+  <!-- Header -->
+  <header>
+    <div class="container" id="maincontent" tabindex="-1">
+      <div class="row">
+          <div class="col-lg-6 col-lg-offset-3">
+            {% include 'card.html' %}
+            {% if %}
           </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+            <a class="btn btn-lg btn-outline big-button facebook_button" id="FbShare">
+                Partager sur Facebook
+            </a>
         </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 text-center">
-          <a class="btn btn-lg btn-outline big-button facebook_button" id="FbShare">
-              Partager sur Facebook
-          </a>
+
       </div>
 
     </div>
+  </header>
 
-  </div>
-</header>
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '{{ your_app_id }}',
+        cookie     : true,  // enable cookies to allow the server to access
+                            // the session
+        xfbml      : true,  // parse social plugins on this page
+        version    : 'v2.8' // use graph api version 2.8
+      });
+    };
 
-<div id="fb-root"></div>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '{{ your_app_id }}',
-      cookie     : true,  // enable cookies to allow the server to access
-                          // the session
-      xfbml      : true,  // parse social plugins on this page
-      version    : 'v2.8' // use graph api version 2.8
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9&appId={{ your_app_id }}";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    $('#FbShare').click(function(){
+      FB.ui({
+        method: 'share',
+        href: window.location.href,
+      }, function(response){});
     });
-  };
-
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9&appId={{ your_app_id }}";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  $('#FbShare').click(function(){
-    FB.ui({
-      method: 'share',
-      href: window.location.href,
-    }, function(response){});
-  });
-</script>
+  </script>
+{% endblock %}

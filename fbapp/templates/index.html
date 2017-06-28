@@ -1,89 +1,81 @@
-<!-- Header -->
-<header>
-  <div class="container" id="maincontent" tabindex="-1">
-    <div class="row">
-        <div class="col-lg-6 col-lg-offset-3">
-          <div class="card">
-            <div class="row">
-              <div class="col-sm-3 col-sm-offset-3">
-                  <img class="img-responsive img-circle user_profile" src="{{ url_for('static', filename='img/profile.png') }}" id="user_image">
-              </div>
-              <div class="col-sm-3">
-                <h2 id="user_name">Tom</h2>
-              </div>
-              <div class="col-sm-12">
-                <p id="description" class="blur">Toi, tu sais comment utiliser la console ! Jamais à court d'idées pour réaliser ton objectif, tu es déterminé-e et persévérant-e. Tes amis disent d'ailleurs volontiers que tu as du caractère et que tu ne te laisses pas marcher sur les pieds. Un peu hacker sur les bords, tu aimes trouver des solutions à tout problème. N'aurais-tu pas un petit problème d'autorité ? ;-)</p>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-    <div class="row">
-      <div class="intro-text">
-        <h1 class="name">Prêt-e à savoir qui tu es vraiment ?</h1>
-        <hr class="star-light">
-      </div>
-      <div class="col-lg-8 col-lg-offset-2 text-center">
-        <p>
-          Connecte-toi à Facebook afin de connaître les résultats !
-        </p>
-        <p style="margin-top: 20px;">
-          <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onlogin='checkLoginState()'></div>
-        </p>
-      </div>
-    </div>
-  </div>
-</header>
+{% extends 'base.html' %}
 
-<div id="fb-root"></div>
-<script>
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    if (response.status === 'connected') {
-      callAPI();
+{% block content %}
+  <!-- Header -->
+  <header>
+    <div class="container" id="maincontent" tabindex="-1">
+      <div class="row">
+          <div class="col-lg-6 col-lg-offset-3">
+            {% include 'card.html' %}
+          </div>
+      </div>
+      <div class="row">
+        <div class="intro-text">
+          <h1 class="name">Prêt-e à savoir qui tu es vraiment ?</h1>
+          <hr class="star-light">
+        </div>
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+          <p>
+            Connecte-toi à Facebook afin de connaître les résultats !
+          </p>
+          <p style="margin-top: 20px;">
+            <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true" onlogin='checkLoginState()'></div>
+          </p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div id="fb-root"></div>
+  <script>
+    // This is called with the results from from FB.getLoginStatus().
+    function statusChangeCallback(response) {
+      if (response.status === 'connected') {
+        callAPI();
+      }
     }
-  }
-  // This function is called when someone finishes with the Login
-  // Button.
-  // But it is called twice so we need to tweak it a little bit.
-  var counter = 0;
-  function checkLoginState() {
-    counter += 1
-    if (counter == 1) {
+    // This function is called when someone finishes with the Login
+    // Button.
+    // But it is called twice so we need to tweak it a little bit.
+    var counter = 0;
+    function checkLoginState() {
+      counter += 1
+      if (counter == 1) {
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response);
+        });
+      }
+    }
+
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '{{ config['FB_APP_ID'] }}',
+        cookie     : true,  // enable cookies to allow the server to access
+                            // the session
+        xfbml      : true,  // parse social plugins on this page
+        version    : 'v2.8' // use graph api version 2.8
+      });
+
       FB.getLoginStatus(function(response) {
         statusChangeCallback(response);
       });
+    };
+
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9&appId={{ config['FB_APP_ID'] }}";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    function callAPI() {
+      console.log('Welcome! Fetching your information.... ');
+      FB.api('/me', {fields: 'id, first_name, gender'}, function(response) {
+        console.log('Successful login for: ' + response.first_name);
+        var url = window.location.href + 'result?first_name=' + response.first_name + '&id=' + response.id + '&gender=' + response.gender;
+        window.location.href = url;
+      });
     }
-  }
-
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '{{ config['FB_APP_ID'] }}',
-      cookie     : true,  // enable cookies to allow the server to access
-                          // the session
-      xfbml      : true,  // parse social plugins on this page
-      version    : 'v2.8' // use graph api version 2.8
-    });
-
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  };
-
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9&appId={{ config['FB_APP_ID'] }}";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-  function callAPI() {
-    console.log('Welcome! Fetching your information.... ');
-    FB.api('/me', {fields: 'id, first_name, gender'}, function(response) {
-      console.log('Successful login for: ' + response.first_name);
-      var url = window.location.href + 'result?first_name=' + response.first_name + '&id=' + response.id + '&gender=' + response.gender;
-      window.location.href = url;
-    });
-  }
-</script>
+  </script>
+{% endblock %}
