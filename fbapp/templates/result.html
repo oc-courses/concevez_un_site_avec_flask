@@ -44,7 +44,7 @@
     $('#FbShare').click(function(){
       FB.ui({
         method: 'share',
-        href: window.location.href,
+        href: {{ og_url }},
       }, function(response){});
     });
   </script>
