@@ -42,7 +42,7 @@ def result():
     profile_pic = 'http://graph.facebook.com/' + uid + '/picture?type=large'
     description = find_content(gender).description
     img = 'tmp/sample.jpg'
-    og_url = url_for('index', filename=img, _external=True)
+    og_url = url_for('index', img=img, _external=True)
     return render_template('result.html',
                             user_name=user_name,
                             user_image=profile_pic,
