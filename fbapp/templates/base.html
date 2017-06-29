@@ -10,11 +10,12 @@
     <meta name="author" content="">
     <title>Le test ultime !</title>
 
-    <meta property="og:title" content="Le test ultime !" />
+    <meta property="og:title" content="{{ page_title }}" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://le-test-ultime.hello-birds.com" />
-    <meta property="og:image" content="tmp/sample.jpg" />
-    <meta property="og:description" content="Faites le test ultime et découvrez qui vous êtes vraiment !" />
+    <meta property="og:url" content="{{ og_url }}" />
+    <meta property="og:image" content="{{ og_image }}" />
+    <meta property="og:description" content="{{ og_description }}" />
+    <meta name="fb:app_id" content="{{ config['FB_APP_ID'] }}">
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
