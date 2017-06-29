@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.config.from_object('config')
 # To get one variable, tape app.config['MY_VARIABLE']
 
-from .utils import find_content
+from .utils import find_content, OpenGraphImage
 
 @app.route('/')
 @app.route('/index/')
@@ -41,7 +41,7 @@ def result():
     uid = request.args['id']
     profile_pic = 'http://graph.facebook.com/' + uid + '/picture?type=large'
     description = find_content(gender).description
-    img = 'tmp/sample.jpg'
+    img = OpenGraphImage(uid, user_name, description).location
     og_url = url_for('index', img=img, _external=True)
     return render_template('result.html',
                             user_name=user_name,
