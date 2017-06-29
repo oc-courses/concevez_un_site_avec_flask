@@ -41,7 +41,7 @@ def result():
     uid = request.args['id']
     profile_pic = 'http://graph.facebook.com/' + uid + '/picture?type=large'
     description = find_content(gender).description
-    img = url_for('static', filename='tmp/sample.jpg')
+    img = 'tmp/sample.jpg'
     og_url = url_for('index', filename=img, _external=True)
     return render_template('result.html',
                             user_name=user_name,
