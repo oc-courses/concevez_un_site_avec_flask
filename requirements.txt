@@ -12,6 +12,7 @@ MarkupSafe==1.0
 mccabe==0.6.1
 olefile==0.44
 Pillow==4.1.1
+psycopg2==2.7.1
 py==1.4.34
 pylint==1.7.2
 pytest==3.1.2
