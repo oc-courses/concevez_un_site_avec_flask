@@ -43,7 +43,6 @@ def result():
     description = find_content(gender).description
     img = OpenGraphImage(uid, user_name, description).location
     og_url = url_for('index', img=img, _external=True)
-    # import pdb; pdb.set_trace()
     return render_template('result.html',
                             user_name=user_name,
                             user_image=profile_pic,
