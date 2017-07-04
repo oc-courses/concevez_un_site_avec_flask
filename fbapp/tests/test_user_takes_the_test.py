@@ -2,6 +2,7 @@ from flask_testing import LiveServerTestCase
 from selenium import webdriver
 import selenium.webdriver.support.ui as ui
 from selenium.webdriver.common.action_chains import ActionChains
+from flask import url_for
 
 from .. import app
 from .. import models
@@ -20,11 +21,11 @@ class TestUserTakesTheTest(LiveServerTestCase):
         # Ajout de données dans la base.
         models.init_db()
         self.wait = ui.WebDriverWait(self.driver, 1000)
-        self.result_page = '{domainname}/result/?first_name={first_name}&id={user_id}&gender={gender}'.format(
-                domainname=self.get_server_url(),
-                first_name=app.config['FB_USER_NAME'],
-                user_id=app.config['FB_USER_ID'],
-                gender=app.config['FB_USER_GENDER'])
+        self.result_page = url_for('result',
+                                    first_name=app.config['FB_USER_NAME'],
+                                    id=app.config['FB_USER_ID'],
+                                    gender=app.config['FB_USER_GENDER'],
+                                    _external=True)
 
     # Méthode exécutée après chaque test
     def tearDown(self):
