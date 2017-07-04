@@ -32,7 +32,6 @@
         version    : 'v2.8' // use graph api version 2.8
       });
     };
-
     (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
@@ -40,7 +39,6 @@
       js.src = "https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9&appId={{ config['FB_APP_ID'] }}";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-
     $('#FbShare').click(function(){
       FB.ui({
         method: 'share',
