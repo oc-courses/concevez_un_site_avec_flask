@@ -36,9 +36,9 @@ def index():
 
 @app.route('/result/')
 def result():
-    gender = request.args['gender']
-    user_name = request.args['first_name']
-    uid = request.args['id']
+    gender = request.args.get('gender')
+    user_name = request.args.get('first_name')
+    uid = request.args.get('id')
     profile_pic = 'http://graph.facebook.com/' + uid + '/picture?type=large'
     description = find_content(gender).description
     img = OpenGraphImage(uid, user_name, description).location
