@@ -11,7 +11,7 @@ from .utils import find_content, OpenGraphImage
 @app.route('/')
 @app.route('/index/')
 def index():
-    if 'img' in request.args.keys():
+    if 'img' in request.args:
         img = request.args['img']
         og_url = url_for('index', img=img, _external=True)
         og_image = url_for('static', filename=img, _external=True)
