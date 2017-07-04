@@ -2,6 +2,7 @@ from flask_testing import LiveServerTestCase
 from selenium import webdriver
 import selenium.webdriver.support.ui as ui
 from selenium.webdriver.common.action_chains import ActionChains
+from flask import url_for
 
 from .. import app
 from .. import models
@@ -20,11 +21,11 @@ class TestUserTakesTheTest(LiveServerTestCase):
         # Ajout de données dans la base.
         models.init_db()
         self.wait = ui.WebDriverWait(self.driver, 1000)
-        self.result_page = '{domainname}/result/?first_name={first_name}&id={user_id}&gender={gender}'.format(
-                domainname=self.get_server_url(),
-                first_name=app.config['FB_USER_NAME'],
-                user_id=app.config['FB_USER_ID'],
-                gender=app.config['FB_USER_GENDER'])
+        self.result_page = url_for('result',
+                                    first_name=app.config['FB_USER_NAME'],
+                                    id=app.config['FB_USER_ID'],
+                                    gender=app.config['FB_USER_GENDER'],
+                                    _external=True)
 
     # Méthode exécutée après chaque test
     def tearDown(self):
@@ -78,6 +79,6 @@ class TestUserTakesTheTest(LiveServerTestCase):
         # donc de n'avoir plus qu'une fenêtre d'ouverte.
         self.wait.until(lambda driver: len(self.driver.window_handles) == 1)
         # On attend que la redirection soit finie.
-        self.wait.until(lambda driver: len(self.driver.current_url) > len(self.get_server_url())+1)
+        self.wait.until(lambda driver: '?' in self.driver.current_url)
         # L'URL correspond au schéma attendu
         assert self.driver.current_url == self.result_page
