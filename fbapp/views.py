@@ -8,7 +8,6 @@ app.config.from_object('config')
 
 @app.route('/')
 def index():
-    import pdb; pdb.set_trace()
     return "Hello world !"
 
 if __name__ == "__main__":
