@@ -15,15 +15,15 @@
     <meta property="og:url" content="http://le-test-ultime.hello-birds.com/index.html&img=/tmp/111823112767411.jpg" />
     <meta property="og:image" content="https://le-test-ultime.hello-birds.com/tmp/111823112767411.jpg" />
     <meta property="og:description" content="Faites le test ultime et découvrez qui vous êtes vraiment !" />
-    <meta name="fb:app_id" content="{{ config['FB_APP_ID'] }}">
+    <meta name="fb:app_id" content="237136890124413">
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/bootstrap/bootstrap.min.css">
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="css/freelancer-theme.min.css">
+    <link rel="stylesheet" href="static/css/freelancer-theme.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="static/css/custom.css">
 
     <!-- Custom Fonts -->
     <script src="https://use.fontawesome.com/470b91f216.js"></script>
@@ -36,7 +36,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script src="js/jquery/jquery.min.js" charset="utf-8"></script>
+    <script src="static/js/jquery/jquery.min.js" charset="utf-8"></script>
 
 </head>
 
@@ -72,7 +72,7 @@
               <div class="card">
                 <div class="row">
                   <div class="col-sm-3 col-sm-offset-3">
-                      <img class="img-responsive img-circle user_profile" src="tmp/cover_111823112767411.jpg" id="user_image">
+                      <img class="img-responsive img-circle user_profile" src="static/tmp/cover_111823112767411.jpg" id="user_image">
                   </div>
                   <div class="col-sm-3">
                     <h2 id="user_name">Tom</h2>
@@ -100,7 +100,7 @@
     <script>
       window.fbAsyncInit = function() {
         FB.init({
-          appId      : '{{ your_app_id }}',
+          appId      : '237136890124413',
           cookie     : true,  // enable cookies to allow the server to access
                               // the session
           xfbml      : true,  // parse social plugins on this page
@@ -112,7 +112,7 @@
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = "https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9&appId={{ your_app_id }}";
+        js.src = "https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9&appId=237136890124413";
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
 
@@ -146,13 +146,13 @@
     </div>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap/bootstrap.min.js" charset="utf-8"></script>
+    <script src="static/js/bootstrap/bootstrap.min.js" charset="utf-8"></script>
 
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
     <!-- Theme JavaScript -->
-    <script src="js/freelancer-theme.min.js" charset="utf-8"></script>
+    <script src="static/js/freelancer-theme.min.js" charset="utf-8"></script>
 
 </body>
 
