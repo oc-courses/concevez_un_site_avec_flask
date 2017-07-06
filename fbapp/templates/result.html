@@ -25,7 +25,7 @@
   <script>
     window.fbAsyncInit = function() {
       FB.init({
-        appId      : '{{ your_app_id }}',
+        appId      : '{{ config['FB_APP_ID'] }}',
         cookie     : true,  // enable cookies to allow the server to access
                             // the session
         xfbml      : true,  // parse social plugins on this page
@@ -37,7 +37,7 @@
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9&appId={{ your_app_id }}";
+      js.src = "https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9&appId={{ config['FB_APP_ID'] }}";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
