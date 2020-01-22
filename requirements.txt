@@ -1,6 +1,6 @@
 astroid==1.5.3
 click==6.7
-Flask==0.12.2
+Flask==1.0
 Flask-SQLAlchemy==2.2
 Flask-Testing==0.6.2
 gunicorn==19.7.1
